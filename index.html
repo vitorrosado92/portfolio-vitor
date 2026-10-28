@@ -279,6 +279,100 @@
     .timeline{padding-left:28px;}
     .tl-dot{left:-28px;}
   }
+
+  /* futuristic interface */
+  :root{
+    --bg:#050812;
+    --surface:rgba(13,20,37,.78);
+    --surface-alt:#101a31;
+    --border:rgba(92,116,163,.28);
+    --text:#edf5ff;
+    --text-muted:#8fa4c4;
+    --accent:#5ee7ff;
+    --accent-2:#b889ff;
+    --code-bg:#070c19;
+    --code-text:#e8f7ff;
+    --code-muted:#7185a6;
+    --radius:14px;
+    --maxw:1040px;
+  }
+  html{background:var(--bg);}
+  body{
+    background:
+      radial-gradient(circle at 8% 8%, rgba(94,231,255,.13), transparent 28rem),
+      radial-gradient(circle at 92% 20%, rgba(184,137,255,.12), transparent 26rem),
+      linear-gradient(rgba(94,231,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(94,231,255,.035) 1px, transparent 1px),
+      var(--bg);
+    background-size:auto,auto,42px 42px,42px 42px;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+    background:linear-gradient(115deg, transparent 0 48%, rgba(94,231,255,.035) 50%, transparent 52%);
+    opacity:.7;
+  }
+  nav{
+    background:rgba(5,8,18,.72);
+    border-bottom-color:rgba(94,231,255,.2);
+  }
+  .navname,.navlinks a{letter-spacing:.03em;}
+  .navname::before{content:"// "; color:var(--accent);}
+  section + section{border-top-color:rgba(92,116,163,.2);}
+  .hero{
+    min-height:calc(100vh - 72px); padding-top:110px;
+    grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);
+    align-items:center; gap:64px;
+  }
+  .kicker{color:var(--accent); letter-spacing:.08em; text-transform:uppercase;}
+  .kicker span{color:var(--accent-2);}
+  h1.name{
+    font-size:clamp(42px,7vw,78px); letter-spacing:-.055em;
+    text-shadow:0 0 34px rgba(94,231,255,.18);
+  }
+  .role{color:#b4c5df; max-width:58ch;}
+  .hero-links{gap:10px;}
+  .btn{border-radius:8px; border-color:rgba(94,231,255,.28); background:rgba(13,20,37,.5);}
+  .btn.primary{
+    background:linear-gradient(110deg,var(--accent),#83a8ff);
+    box-shadow:0 0 26px rgba(94,231,255,.2);
+  }
+  .querycard{
+    border:1px solid rgba(94,231,255,.28); border-radius:16px;
+    box-shadow:0 0 0 1px rgba(184,137,255,.08), 0 25px 80px -30px rgba(94,231,255,.4);
+    position:relative;
+  }
+  .querycard::before{
+    content:"●  ●  ●"; display:block; color:var(--accent-2);
+    letter-spacing:4px; font-size:10px; margin-bottom:16px;
+  }
+  .sh{margin-bottom:38px;}
+  .sh h2{font-size:30px; letter-spacing:-.03em;}
+  .sh h2::before{content:"/"; color:var(--accent); margin-right:8px;}
+  .lead{color:#b4c5df;}
+  .stat,.card,.cert,.contact-item{
+    background:linear-gradient(145deg,rgba(18,29,53,.86),rgba(9,15,29,.7));
+    border-color:rgba(92,116,163,.3);
+    box-shadow:inset 0 1px rgba(255,255,255,.035);
+  }
+  .stat:hover,.card:hover,.contact-item:hover,.cert:hover{
+    border-color:var(--accent); transform:translateY(-3px);
+    box-shadow:0 12px 30px -20px rgba(94,231,255,.7);
+  }
+  .stat,.card,.cert,.contact-item{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;}
+  .stat .num{color:var(--accent); text-shadow:0 0 16px rgba(94,231,255,.28);}
+  .tl-date,.skillgroup h3,.contact-item .lbl{color:var(--accent);}
+  .timeline::before{background:linear-gradient(var(--accent),var(--accent-2),transparent);}
+  .tl-dot{background:#07101f; box-shadow:0 0 14px rgba(94,231,255,.55);}
+  .tl-title{color:#f5f8ff;}
+  .card .tag{color:var(--accent-2); text-transform:uppercase; letter-spacing:.08em;}
+  .chip{background:rgba(94,231,255,.045); border-color:rgba(94,231,255,.2);}
+  .filter-btn{border-color:rgba(94,231,255,.23);}
+  .filter-btn.active{background:linear-gradient(110deg,var(--accent),#83a8ff); color:#06101c;}
+  .cert .status{background:rgba(94,231,255,.08);}
+  footer{color:#7185a6;}
+  @media (max-width:820px){
+    .hero{min-height:auto; padding-top:72px; grid-template-columns:1fr; gap:34px;}
+  }
 </style>
 </head>
 <body>
@@ -303,12 +397,13 @@
 
   <section class="hero" id="topo">
     <div>
-      <div class="kicker">são paulo, br <span>·</span> disponível para estágio e posições júnior em dados</div>
+      <div class="kicker">são paulo, br <span>·</span> disponível para dados, analytics e data engineering jr.</div>
       <h1 class="name">Vitor Teixeira Rosado</h1>
-      <p class="role">Passei os últimos anos resolvendo chamados, acessos e licenças em ambientes corporativos e bancários. No caminho, percebi que o que mais me interessava não era o chamado em si, mas os dados por trás dele — e foi isso que me trouxe até aqui.</p>
+      <p class="role">Profissional de TI em transição para Dados, com experiência em suporte técnico, administração de acessos e gestão de informações em ambientes corporativos e bancários.</p>
       <div class="hero-links">
         <a class="btn primary" href="#projetos">ver projetos</a>
         <a class="btn" href="#trajetoria">ver trajetória</a>
+        <a class="btn" href="Vitor_Teixeira_Rosado.pdf" download>baixar currículo</a>
         <a class="btn" href="mailto:vitor.rosado92@outlook.com">falar comigo</a>
       </div>
     </div>
@@ -456,7 +551,7 @@
       <div class="skillgroup">
         <h3>linguagens &amp; dados</h3>
         <div class="stack">
-          <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">SQL</span><span class="chip">MySQL</span><span class="chip">PowerShell</span>
+          <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">SQL</span><span class="chip">MySQL</span><span class="chip">PowerShell</span><span class="chip">VBA / VBS</span>
         </div>
       </div>
       <div class="skillgroup">
@@ -474,7 +569,7 @@
       <div class="skillgroup">
         <h3>cloud &amp; devops</h3>
         <div class="stack">
-          <span class="chip">Docker</span><span class="chip">Git</span>
+          <span class="chip">Docker</span><span class="chip">Git</span><span class="chip">Microsoft 365</span>
         </div>
       </div>
       <div class="skillgroup">
@@ -544,7 +639,7 @@
 
 </div>
 
-<footer>construído por Vitor Teixeira Rosado</footer>
+<footer>construído por Vitor Teixeira Rosado · dados que viram decisão</footer>
 
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" role="dialog" aria-modal="true" id="modalBox">
