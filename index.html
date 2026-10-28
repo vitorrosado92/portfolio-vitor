@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitor Teixeira Rosado — Dados &amp; Analytics</title>
+<meta name="description" content="Portfólio de Vitor Teixeira Rosado — suporte técnico em transição para dados, analytics e engenharia de dados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F7FA;
+    --surface:#FFFFFF;
+    --surface-alt:#EDF1F5;
+    --border:#D8E0E7;
+    --text:#16222E;
+    --text-muted:#55636F;
+    --accent:#0E7C9B;
+    --accent-2:#C97A1E;
+    --code-bg:#0F1720;
+    --code-text:#E6EDF3;
+    --code-muted:#8FA0AF;
+    --radius:10px;
+    --maxw:840px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F1720;
+      --surface:#17212C;
+      --surface-alt:#1B2531;
+      --border:#2A3742;
+      --text:#E6EDF3;
+      --text-muted:#8FA0AF;
+      --accent:#4CC9F0;
+      --accent-2:#F4A824;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F1720;
+    --surface:#17212C;
+    --surface-alt:#1B2531;
+    --border:#2A3742;
+    --text:#E6EDF3;
+    --text-muted:#8FA0AF;
+    --accent:#4CC9F0;
+    --accent-2:#F4A824;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:"Space Grotesk", system-ui, sans-serif;
+    font-weight:600;
+    line-height:1.15;
+    margin:0;
+  }
+  a{color:var(--accent);}
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  section{padding:76px 0;}
+  section + section{border-top:1px solid var(--border);}
+
+  /* nav */
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .navwrap{
+    max-width:var(--maxw); margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+  }
+  .navname{font-family:"Space Grotesk"; font-weight:600; font-size:15px; text-decoration:none; color:var(--text);}
+  .navlinks{display:flex; gap:22px; font-size:14px;}
+  .navlinks a{color:var(--text-muted); text-decoration:none;}
+  .navlinks a:hover{color:var(--accent);}
+
+  /* hero */
+  .hero{padding-top:64px; display:grid; gap:40px;}
+  .kicker{
+    font-family:"IBM Plex Mono"; font-size:13px; color:var(--text-muted);
+    margin-bottom:14px;
+  }
+  .kicker span{color:var(--accent);}
+  h1.name{font-size:clamp(34px,5.4vw,52px); letter-spacing:-0.01em;}
+  .role{
+    font-size:clamp(17px,2.2vw,20px); color:var(--text-muted);
+    margin-top:12px; max-width:52ch;
+  }
+  .hero-links{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px;}
+  .btn{
+    font-family:"IBM Plex Mono"; font-size:13.5px;
+    padding:10px 16px; border-radius:8px; text-decoration:none;
+    border:1px solid var(--border); color:var(--text);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .btn:hover{border-color:var(--accent); color:var(--accent);}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#08131A;}
+  .btn.primary:hover{opacity:.9; color:#08131A;}
+
+  .querycard{
+    background:var(--code-bg); border-radius:12px; padding:22px 24px;
+    font-family:"IBM Plex Mono"; font-size:14px; line-height:1.75;
+    color:var(--code-text); overflow-x:auto;
+    box-shadow:0 20px 50px -25px rgba(0,0,0,.5);
+  }
+  .querycard .dim{color:var(--code-muted);}
+  .querycard .kw{color:#7DD3FC;}
+  .querycard .str{color:#FCD34D;}
+  .cursor{display:inline-block; width:8px; height:15px; background:var(--code-text); vertical-align:-2px; animation:blink 1.1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* section headings */
+  .sh{display:flex; align-items:baseline; gap:12px; margin-bottom:34px;}
+  .sh h2{font-size:26px;}
+  .sh .idx{font-family:"IBM Plex Mono"; color:var(--text-muted); font-size:14px;}
+
+  /* about */
+  .lead{font-size:18px; max-width:64ch;}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:18px; margin-top:36px;}
+  .stat{border:1px solid var(--border); border-radius:var(--radius); padding:18px;}
+  .stat .num{font-family:"Space Grotesk"; font-size:28px; font-weight:700; color:var(--accent);}
+  .stat .lbl{font-size:13.5px; color:var(--text-muted); margin-top:4px;}
+
+  /* timeline */
+  .timeline{position:relative; padding-left:34px;}
+  .timeline::before{
+    content:""; position:absolute; left:9px; top:6px; bottom:6px; width:1px; background:var(--border);
+  }
+  .tl-item{position:relative; padding-bottom:34px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute; left:-34px; top:4px; width:19px; height:19px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"IBM Plex Mono"; font-size:9px; color:var(--accent);
+  }
+  .tl-date{font-family:"IBM Plex Mono"; font-size:13px; color:var(--text-muted);}
+  .tl-title{font-family:"Space Grotesk"; font-weight:600; font-size:17px; margin-top:4px;}
+  .tl-desc{font-size:14.5px; color:var(--text-muted); margin-top:6px; max-width:58ch;}
+
+  /* projects */
+  .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;}
+  .card{
+    border:1px solid var(--border); border-radius:var(--radius); padding:22px;
+    background:var(--surface); display:flex; flex-direction:column; gap:10px;
+  }
+  .card .tag{font-family:"IBM Plex Mono"; font-size:11.5px; color:var(--accent-2); }
+  .card h3{font-size:17px;}
+  .card p{font-size:14.5px; color:var(--text-muted); margin:0;}
+  .card .metric{
+    margin-top:auto; padding-top:12px; border-top:1px solid var(--border);
+    font-family:"IBM Plex Mono"; font-size:13px; color:var(--text);
+  }
+  .card .metric b{color:var(--accent);}
+  .stack{display:flex; flex-wrap:wrap; gap:6px; margin-top:2px;}
+  .chip{
+    font-family:"IBM Plex Mono"; font-size:11.5px; padding:3px 8px;
+    border:1px solid var(--border); border-radius:6px; color:var(--text-muted);
+  }
+
+  /* skills */
+  .skillgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px;}
+  .skillgroup h3{font-size:14px; font-family:"IBM Plex Mono"; color:var(--text-muted); font-weight:500; margin-bottom:12px;}
+  .skillgroup .stack{gap:8px;}
+  .skillgroup .chip{color:var(--text); font-size:12.5px; padding:5px 10px;}
+
+  /* certs */
+  .certs{display:grid; gap:12px;}
+  .cert{
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px;
+  }
+  .cert .name{font-weight:600; font-size:15px;}
+  .cert .org{font-size:13px; color:var(--text-muted);}
+  .cert .status{font-family:"IBM Plex Mono"; font-size:12px; padding:4px 9px; border-radius:6px; background:var(--surface-alt); color:var(--text-muted); white-space:nowrap;}
+  .cert .status.done{color:var(--accent);}
+
+  /* contact */
+  .contact-grid{display:flex; flex-wrap:wrap; gap:14px; margin-top:28px;}
+  .contact-item{
+    border:1px solid var(--border); border-radius:var(--radius); padding:16px 20px;
+    flex:1 1 200px; text-decoration:none; color:var(--text);
+    transition:border-color .15s ease;
+  }
+  .contact-item:hover{border-color:var(--accent);}
+  .contact-item .lbl{font-family:"IBM Plex Mono"; font-size:12px; color:var(--text-muted); margin-bottom:4px;}
+  .contact-item .val{font-weight:500; font-size:15px;}
+
+  .theme-toggle{
+    background:var(--surface-alt); border:1px solid var(--border); color:var(--text);
+    width:30px; height:30px; border-radius:7px; cursor:pointer;
+    font-size:14px; display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease;
+  }
+  .theme-toggle:hover{border-color:var(--accent);}
+
+  /* filters */
+  .filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px;}
+  .filter-btn{
+    font-family:"IBM Plex Mono"; font-size:12.5px; padding:7px 13px;
+    border-radius:999px; border:1px solid var(--border); background:transparent;
+    color:var(--text-muted); cursor:pointer; transition:all .15s ease;
+  }
+  .filter-btn:hover{border-color:var(--accent); color:var(--text);}
+  .filter-btn.active{background:var(--accent); border-color:var(--accent); color:#08131A;}
+
+  .card{cursor:pointer;}
+  .card:hover{border-color:var(--accent);}
+  .card-btn{
+    margin-top:4px; align-self:flex-start;
+    font-family:"IBM Plex Mono"; font-size:12.5px; background:none;
+    border:none; color:var(--accent); cursor:pointer; padding:0;
+  }
+  .card-btn:hover{text-decoration:underline;}
+  .card[hidden]{display:none;}
+
+  /* modal */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(6,10,14,.62);
+    display:none; align-items:flex-start; justify-content:center;
+    padding:40px 20px; z-index:50; overflow-y:auto;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    max-width:640px; width:100%; padding:32px; position:relative;
+    animation:modalIn .18s ease;
+  }
+  @keyframes modalIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+  .modal-close{
+    position:absolute; top:18px; right:18px; background:var(--surface-alt);
+    border:1px solid var(--border); color:var(--text); width:30px; height:30px;
+    border-radius:7px; cursor:pointer; font-size:15px; line-height:1;
+  }
+  .modal-close:hover{border-color:var(--accent);}
+  .modal .tag{margin-bottom:8px; display:block;}
+  .modal h3{font-size:21px; margin-bottom:14px; padding-right:36px;}
+  .modal .metric-row{
+    display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 20px;
+  }
+  .modal .metric-pill{
+    font-family:"IBM Plex Mono"; font-size:12.5px; padding:6px 12px;
+    border-radius:7px; background:var(--surface-alt); border:1px solid var(--border);
+  }
+  .modal .metric-pill b{color:var(--accent);}
+  .modal ul{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px;}
+  .modal li{font-size:14.5px; color:var(--text-muted);}
+  .modal .concl{
+    margin-top:20px; padding-top:16px; border-top:1px solid var(--border);
+    font-size:14px; color:var(--text);
+  }
+
+  /* copy button */
+  .copy-btn{
+    background:none; border:none; color:var(--text-muted); cursor:pointer;
+    font-family:"IBM Plex Mono"; font-size:11.5px; padding:0; margin-left:8px;
+    text-decoration:underline; text-underline-offset:2px;
+  }
+  .copy-btn:hover{color:var(--accent);}
+
+  footer{padding:32px 0 60px; text-align:center; color:var(--text-muted); font-size:13px; font-family:"IBM Plex Mono";}
+
+  @media (max-width:640px){
+    section{padding:56px 0;}
+    .timeline{padding-left:28px;}
+    .tl-dot{left:-28px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navwrap">
+    <a class="navname" href="#topo">Vitor Teixeira Rosado</a>
+    <div class="navlinks">
+      <a href="#sobre">Sobre</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#skills">Skills</a>
+      <a href="#contato">Contato</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro">
+        <span id="themeIcon">◑</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero" id="topo">
+    <div>
+      <div class="kicker">são paulo, br <span>·</span> disponível para estágio e posições júnior em dados</div>
+      <h1 class="name">Vitor Teixeira Rosado</h1>
+      <p class="role">Passei os últimos anos resolvendo chamados, acessos e licenças em ambientes corporativos e bancários. No caminho, percebi que o que mais me interessava não era o chamado em si, mas os dados por trás dele — e foi isso que me trouxe até aqui.</p>
+      <div class="hero-links">
+        <a class="btn primary" href="#projetos">ver projetos</a>
+        <a class="btn" href="#trajetoria">ver trajetória</a>
+        <a class="btn" href="mailto:vitor.rosado92@outlook.com">falar comigo</a>
+      </div>
+    </div>
+
+    <div class="querycard" aria-label="resumo em formato de consulta">
+<span class="kw">SELECT</span> nome, foco, disponibilidade
+<span class="kw">FROM</span> candidatos
+<span class="kw">WHERE</span> stack <span class="dim">@></span> [<span class="str">'Python'</span>, <span class="str">'SQL'</span>, <span class="str">'Power BI'</span>]
+  <span class="kw">AND</span> origem = <span class="str">'suporte técnico'</span>
+  <span class="kw">AND</span> destino = <span class="str">'dados'</span>;
+
+<span class="dim">-- 1 linha retornada</span>
+<span class="dim">nome:</span> Vitor Teixeira Rosado
+<span class="dim">foco:</span> analytics, engenharia de dados
+<span class="dim">disponibilidade:</span> imediata<span class="cursor"></span>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="sh"><h2>Sobre</h2></div>
+    <p class="lead">Formado em Tecnologia em Banco de Dados pela FIAP, hoje curso Análise e Desenvolvimento de Sistemas na Mackenzie e atuo no Service Desk da Atual-IT. Gosto de processos: entender por que algo trava, organizar o que está bagunçado e automatizar o que se repete. É essa mesma lógica que aplico em projetos de dados — da limpeza até o modelo, do modelo até o gráfico que alguém realmente usa para decidir.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">1.000+</div><div class="lbl">chamados técnicos resolvidos</div></div>
+      <div class="stat"><div class="num">0,96</div><div class="lbl">R² em modelo de regressão linear</div></div>
+      <div class="stat"><div class="num">80%+</div><div class="lbl">acurácia em classificador de sentimento</div></div>
+      <div class="stat"><div class="num">DP-600</div><div class="lbl">certificação Microsoft (Fabric)</div></div>
+    </div>
+  </section>
+
+  <section id="trajetoria">
+    <div class="sh"><h2>Trajetória</h2></div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot">●</div>
+        <div class="tl-date">jul/2024 — atual</div>
+        <div class="tl-title">Service Desk — Atual-IT</div>
+        <div class="tl-desc">Mais de 1.000 chamados técnicos resolvidos. Gestão completa de licenciamento Microsoft 365, com extração e tratamento de dados via CSV para relatórios de usuários e licenças no tenant.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">●</div>
+        <div class="tl-date">fev/2025 — jul/2027 (em andamento)</div>
+        <div class="tl-title">Análise e Desenvolvimento de Sistemas — Universidade Presbiteriana Mackenzie</div>
+        <div class="tl-desc">Graduação em andamento, período noturno. Estudos atuais incluem programação de sistemas, estruturas de dados e fundamentos de redes.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">●</div>
+        <div class="tl-date">dez/2023</div>
+        <div class="tl-title">Tecnologia em Banco de Dados — FIAP</div>
+        <div class="tl-desc">Formação com foco em Data Science, BI e Análise de Dados. Base para os projetos aplicados em Python, Machine Learning e visualização de dados.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">●</div>
+        <div class="tl-date">ago/2021 — jun/2023</div>
+        <div class="tl-title">Suporte ao Cliente e Administração de Acessos — Banco Sofisa</div>
+        <div class="tl-desc">Responsável pelo processo de onboarding, apoio a auditorias internas e desenvolvimento de uma automação em VBA para criação e bloqueio de usuários em lote.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">●</div>
+        <div class="tl-date">fev/2020 — ago/2021</div>
+        <div class="tl-title">Auxiliar de Tecnologia da Educação — Colégio Presbiteriano Mackenzie</div>
+        <div class="tl-desc">Suporte a professores e conteúdos digitais na plataforma Moodle, durante a implementação de um modelo híbrido de ensino.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="sh"><h2>Projetos</h2></div>
+
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="todos" type="button">Todos</button>
+      <button class="filter-btn" data-filter="ml" type="button">Machine Learning</button>
+      <button class="filter-btn" data-filter="bi" type="button">BI</button>
+      <button class="filter-btn" data-filter="infra" type="button">Infraestrutura</button>
+      <button class="filter-btn" data-filter="automacao" type="button">Automação</button>
+    </div>
+
+    <div class="projects" id="projectGrid">
+
+      <div class="card" data-category="ml" data-project="reclamacoes">
+        <div class="tag">machine learning</div>
+        <h3>Previsão de reclamações de planos de saúde</h3>
+        <p>Unificação de bases 2021–2023 e análise exploratória para identificar padrões de reclamação por operadora, seguida de um modelo de regressão linear.</p>
+        <div class="stack"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Regressão Linear</span></div>
+        <div class="metric">R² de <b>0,96</b></div>
+        <button class="card-btn" type="button">Ver detalhes</button>
+      </div>
+
+      <div class="card" data-category="ml" data-project="sentimento">
+        <div class="tag">machine learning</div>
+        <h3>Classificador de sentimento de clientes</h3>
+        <p>Pipeline de NLP com limpeza de texto, remoção de stopwords e vetorização TF-IDF, treinando um modelo Random Forest para classificar reviews.</p>
+        <div class="stack"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">TF-IDF</span></div>
+        <div class="metric">Acurácia acima de <b>80%</b></div>
+        <button class="card-btn" type="button">Ver detalhes</button>
+      </div>
+
+      <div class="card" data-category="bi" data-project="vendas">
+        <div class="tag">business intelligence</div>
+        <h3>Dashboard estratégico de vendas</h3>
+        <p>Dashboard interativo de vendas com visão geral de faturamento, análise regional, tendência temporal e ranking de produtos.</p>
+        <div class="stack"><span class="chip">Tableau</span></div>
+        <div class="metric">Suporte a decisão <b>comercial</b></div>
+        <button class="card-btn" type="button">Ver detalhes</button>
+      </div>
+
+      <div class="card" data-category="infra" data-project="docker">
+        <div class="tag">infraestrutura</div>
+        <h3>Ambiente de banco de dados containerizado</h3>
+        <p>Container Docker com MySQL: criação de banco, tabelas, inserção de dados via DDL/DML e gestão de usuários e permissões.</p>
+        <div class="stack"><span class="chip">Docker</span><span class="chip">MySQL</span></div>
+        <div class="metric">Ambiente <b>reprodutível</b></div>
+        <button class="card-btn" type="button">Ver detalhes</button>
+      </div>
+
+      <div class="card" data-category="automacao" data-project="halo">
+        <div class="tag">automação</div>
+        <h3>Automação de chamados — Halo PSA</h3>
+        <p>Script em PowerShell que autentica na API REST do Halo PSA via OAuth2, gera narrativas estruturadas de chamado e registra atividade em CSV.</p>
+        <div class="stack"><span class="chip">PowerShell</span><span class="chip">REST API</span><span class="chip">OAuth2</span></div>
+        <div class="metric">Menos <b>trabalho manual</b></div>
+        <button class="card-btn" type="button">Ver detalhes</button>
+      </div>
+
+      <div class="card" data-category="automacao" data-project="dp600">
+        <div class="tag">estudo estruturado</div>
+        <h3>Sistema de estudo para certificação DP-600</h3>
+        <p>Plano de 10 semanas construído no Notion, com banco de questões, repetição espaçada e registro de erros para revisão direcionada.</p>
+        <div class="stack"><span class="chip">Notion</span><span class="chip">Fabric</span><span class="chip">Power BI</span></div>
+        <div class="metric">Certificação <b>conquistada</b></div>
+        <button class="card-btn" type="button">Ver detalhes</button>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sh"><h2>Skills</h2></div>
+    <div class="skillgrid">
+      <div class="skillgroup">
+        <h3>linguagens &amp; dados</h3>
+        <div class="stack">
+          <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">SQL</span><span class="chip">MySQL</span><span class="chip">PowerShell</span>
+        </div>
+      </div>
+      <div class="skillgroup">
+        <h3>machine learning</h3>
+        <div class="stack">
+          <span class="chip">scikit-learn</span><span class="chip">TF-IDF</span><span class="chip">Random Forest</span><span class="chip">Regressão Linear</span>
+        </div>
+      </div>
+      <div class="skillgroup">
+        <h3>bi &amp; visualização</h3>
+        <div class="stack">
+          <span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">QlikView</span><span class="chip">Excel</span>
+        </div>
+      </div>
+      <div class="skillgroup">
+        <h3>cloud &amp; devops</h3>
+        <div class="stack">
+          <span class="chip">Docker</span><span class="chip">Git</span>
+        </div>
+      </div>
+      <div class="skillgroup">
+        <h3>ferramentas de suporte</h3>
+        <div class="stack">
+          <span class="chip">Microsoft 365 Admin</span><span class="chip">Halo PSA</span><span class="chip">N-able RMM</span><span class="chip">Zabbix</span>
+        </div>
+      </div>
+      <div class="skillgroup">
+        <h3>idiomas</h3>
+        <div class="stack">
+          <span class="chip">Português — nativo</span><span class="chip">Inglês — intermediário</span><span class="chip">Espanhol — básico</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificacoes">
+    <div class="sh"><h2>Certificações</h2></div>
+    <div class="certs">
+      <div class="cert">
+        <div>
+          <div class="name">DP-600 — Fabric Analytics Engineer Associate</div>
+          <div class="org">Microsoft</div>
+        </div>
+        <div class="status done">concluída</div>
+      </div>
+      <div class="cert">
+        <div>
+          <div class="name">Formação Data Science</div>
+          <div class="org">Alura</div>
+        </div>
+        <div class="status done">concluída</div>
+      </div>
+      <div class="cert">
+        <div>
+          <div class="name">Google Skills</div>
+          <div class="org">Google</div>
+        </div>
+        <div class="status">em andamento</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="sh"><h2>Contato</h2></div>
+    <p class="lead">Estou buscando minha próxima posição em dados — analytics, BI ou engenharia júnior. Se o que você viu aqui fizer sentido para o seu time, vamos conversar.</p>
+    <div class="contact-grid">
+      <a class="contact-item" href="mailto:vitor.rosado92@outlook.com">
+        <div class="lbl">email</div>
+        <div class="val">vitor.rosado92@outlook.com <button class="copy-btn" id="copyEmail" type="button">copiar</button></div>
+      </a>
+      <a class="contact-item" href="tel:+5511974699017">
+        <div class="lbl">telefone</div>
+        <div class="val">(11) 97469-9017</div>
+      </a>
+      <a class="contact-item" href="https://linkedin.com/in/vitorrosado" target="_blank" rel="noopener">
+        <div class="lbl">linkedin</div>
+        <div class="val">/in/vitorrosado</div>
+      </a>
+      <a class="contact-item" href="#topo">
+        <div class="lbl">localização</div>
+        <div class="val">São Paulo, SP</div>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>construído por Vitor Teixeira Rosado</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" id="modalBox">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Fechar">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // theme toggle
+  var root = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  function applyTheme(t){
+    if(t === 'light'){ root.setAttribute('data-theme','light'); icon.textContent = '◐'; }
+    else { root.setAttribute('data-theme','dark'); icon.textContent = '◑'; }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('vitor-portfolio-theme'); } catch(e){}
+  if(saved){ applyTheme(saved); }
+  toggle.addEventListener('click', function(){
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try { localStorage.setItem('vitor-portfolio-theme', next); } catch(e){}
+  });
+
+  // copy email
+  var copyBtn = document.getElementById('copyEmail');
+  copyBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var text = 'vitor.rosado92@outlook.com';
+    var done = function(){
+      var original = copyBtn.textContent;
+      copyBtn.textContent = 'copiado!';
+      setTimeout(function(){ copyBtn.textContent = original; }, 1600);
+    };
+    try {
+      navigator.clipboard.writeText(text).then(done).catch(function(){ done(); });
+    } catch(e){ done(); }
+  });
+
+  // project filters
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('.card');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      cards.forEach(function(card){
+        if(f === 'todos' || card.getAttribute('data-category') === f){
+          card.removeAttribute('hidden');
+        } else {
+          card.setAttribute('hidden','');
+        }
+      });
+    });
+  });
+
+  // project detail data
+  var projectDetails = {
+    reclamacoes: {
+      tag: 'machine learning',
+      title: 'Previsão de reclamações de planos de saúde',
+      metrics: [['R²','0,9639'], ['RMSE','73,87 bi']],
+      steps: [
+        'Unificação das bases de dados de 2021, 2022 e 2023 em uma única base de treino.',
+        'Análise exploratória da distribuição de reclamações ao longo dos anos, revelando variação significativa entre os períodos.',
+        'Levantamento das 10 operadoras com mais reclamações — a UNIMED Seguros Saúde S.A. lidera a lista.',
+        'Construção de um modelo de regressão linear para prever o número total de reclamações a partir da variável "Tipo de Plano Contratado".'
+      ],
+      concl: 'O modelo apresentou bom ajuste, indicando que o tipo de plano contratado tem influência significativa no volume de reclamações — e a variação ao longo dos anos sugere mudanças no próprio cenário do setor de planos de saúde.'
+    },
+    sentimento: {
+      tag: 'machine learning',
+      title: 'Classificador de sentimento de clientes',
+      metrics: [['Acurácia','>80%'], ['Features TF-IDF','5.000']],
+      steps: [
+        'Carregamento da base de reviews de clientes a partir de um arquivo CSV.',
+        'Limpeza de texto: remoção de caracteres especiais e pontuação, conversão para minúsculas e remoção de stopwords.',
+        'Vetorização com TF-IDF, limitada a 5.000 features, e divisão dos dados em treino (80%) e teste (20%) com random_state fixo para reprodutibilidade.',
+        'Treinamento de um modelo Random Forest para classificar avaliações como positivas ou negativas.',
+        'Avaliação com acurácia, matriz de confusão, precisão, recall, F1-score e curva ROC.'
+      ],
+      concl: 'O objetivo era superar 80% de acurácia — com base no conjunto completo de métricas, o Random Forest foi o modelo escolhido por atender esse critério com o melhor equilíbrio entre as medidas avaliadas.'
+    },
+    vendas: {
+      tag: 'business intelligence',
+      title: 'Dashboard estratégico de vendas',
+      metrics: [['Período analisado','2023'], ['Tipos de gráfico','3 combinados']],
+      steps: [
+        'Definição do tema: análise das vendas de 2023, buscando entender o comportamento de consumo e identificar tendências.',
+        'Seção de visão geral com faturamento total, lucro líquido e métricas-chave do ano.',
+        'Gráfico de barras empilhadas para análise por região, mostrando a composição das vendas por mês em cada região.',
+        'Gráfico de linha para tendências temporais, permitindo identificar picos, vales e sazonalidades ao longo do ano.',
+        'Gráfico de barras para ranking dos produtos mais vendidos e seu impacto no faturamento total.'
+      ],
+      concl: 'A combinação desses três tipos de gráfico foi escolhida deliberadamente para dar à equipe comercial uma visão completa — geográfica, temporal e por produto — como base para decisões estratégicas.'
+    },
+    docker: {
+      tag: 'infraestrutura',
+      title: 'Ambiente de banco de dados containerizado',
+      metrics: [['Stack','Docker + MySQL'], ['Comandos','DDL / DML']],
+      steps: [
+        'Comparativo entre VM e Docker: containers compartilham o kernel do host, economizando recursos e iniciando quase instantaneamente frente a VMs.',
+        'Criação do container com "docker run" especificando a imagem mysql:latest e a senha root.',
+        'Acesso ao MySQL dentro do container e criação do banco de dados "BDFIAP".',
+        'Criação de uma tabela e inserção de registros usando comandos DDL (CREATE TABLE) e DML (INSERT INTO).',
+        'Criação de um novo usuário e concessão de privilégios com GRANT ALL PRIVILEGES, replicando um cenário real de controle de acesso a banco de dados.'
+      ],
+      concl: 'O exercício reforçou, na prática, por que containers são mais eficientes que VMs para desenvolvimento ágil e escalabilidade — a mesma lógica que hoje aplico ao pensar em ambientes reprodutíveis de dados.'
+    },
+    halo: {
+      tag: 'automação',
+      title: 'Automação de chamados — Halo PSA',
+      metrics: [['Linguagem','PowerShell'], ['Autenticação','OAuth2']],
+      steps: [
+        'Script "Invoke-HaloTicketWorkflow.ps1" que autentica na API REST do Halo PSA via OAuth2.',
+        'Geração automática de narrativas estruturadas para os chamados, reduzindo o tempo gasto escrevendo o mesmo tipo de descrição manualmente.',
+        'Registro de toda a atividade em CSV, criando um histórico auditável do que foi automatizado.',
+        'Inclusão de um caminho alternativo para solicitar credenciais de API de nível administrativo quando necessário.'
+      ],
+      concl: 'Um projeto pessoal nascido da mesma lógica que já aplicava no Sofisa: identificar tarefas repetitivas no suporte técnico e resolvê-las com automação, sem esperar que alguém pedisse.'
+    },
+    dp600: {
+      tag: 'estudo estruturado',
+      title: 'Sistema de estudo para certificação DP-600',
+      metrics: [['Duração do plano','10 semanas'], ['Resultado','Certificado']],
+      steps: [
+        'Construção de um sistema de estudo completo no Notion, incluindo checklist de 10 semanas, subpáginas de quiz e bancos de dados de repetição espaçada.',
+        'Estrutura diária de estudo inspirada em princípios de neurociência da aprendizagem.',
+        'Incorporação de conteúdos do Microsoft Reactor em PT-BR como material de apoio.',
+        'Criação de um documento de "erros comuns" a partir de um banco de 96 questões práticas, cobrindo T-SQL, Delta Lake, DAX, Direct Lake e pipelines de implantação.',
+        'Escolha do DP-600 como porta de entrada no mercado de dados, priorizado sobre DP-800 e DP-700 por alinhar com a base já existente em Power BI e SQL.'
+      ],
+      concl: 'Mais do que decorar conteúdo, o objetivo foi construir um sistema de estudo repetível — o mesmo tipo de estrutura e disciplina que pretendo levar para o dia a dia de um time de dados.'
+    }
+  };
+
+  var overlay = document.getElementById('modalOverlay');
+  var modalContent = document.getElementById('modalContent');
+  var modalClose = document.getElementById('modalClose');
+
+  function openModal(id){
+    var p = projectDetails[id];
+    if(!p) return;
+    var metricsHtml = p.metrics.map(function(m){
+      return '<span class="metric-pill">'+m[0]+': <b>'+m[1]+'</b></span>';
+    }).join('');
+    var stepsHtml = p.steps.map(function(s){ return '<li>'+s+'</li>'; }).join('');
+    modalContent.innerHTML =
+      '<span class="tag">'+p.tag+'</span>' +
+      '<h3>'+p.title+'</h3>' +
+      '<div class="metric-row">'+metricsHtml+'</div>' +
+      '<ul>'+stepsHtml+'</ul>' +
+      '<div class="concl">'+p.concl+'</div>';
+    overlay.classList.add('open');
+  }
+  function closeModal(){ overlay.classList.remove('open'); }
+
+  document.querySelectorAll('.card').forEach(function(card){
+    var btn = card.querySelector('.card-btn');
+    var id = card.getAttribute('data-project');
+    if(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        openModal(id);
+      });
+    }
+    card.addEventListener('click', function(){ openModal(id); });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>
